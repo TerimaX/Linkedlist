@@ -3,7 +3,7 @@
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "wlstn1124";
 $dbname = "android";
 
 // connect with database demo
@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
  // an array to display response
 
- $isAlready = false;
+ $isAlready = 0;
 
  // on below line we are checking if the parameter send is id or not.
     if(isset($_POST['KakaoID1'], $_POST['KakaoID2'])){
@@ -19,16 +19,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
         // we will search the item for specific id.
 
         $inputKakaoIDMe = $_POST['KakaoID1'];
-        $inputKakaoIDOther = $_POST['KakaoID1'];
+        $inputKakaoIDOther = $_POST['KakaoID2'];
 
-        $stmt = $this->dbCon->prepare("SELECT * FROM chatroom_tbl where KakaoId1 = ?");
+        $stmt = $conn->prepare("SELECT $kakaoid2 FROM chatroom_tbl where KakaoId1 = ?");
             $stmt->bind_param("i",$inputKakaoIDMe);
             $stmt->execute();
-            $stmt->bind_result($kakaoid1, $kakaoid2, $match);
+            $stmt->bind_result($kakaoid2);
     }
     while($stmt->fetch()){
         if($kakaoid2 == $inputKakaoIDOther)
-            $isAlready = true;
+            $isAlready = 1;
     }
      
     //on below line we are selecting the course detail with below id.
